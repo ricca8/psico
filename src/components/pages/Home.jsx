@@ -1,18 +1,21 @@
 import React from 'react';
 import { ArrowRight, Heart, Brain, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useData } from '../../context/DataContext';
 import './Home.css';
 
 const Home = () => {
+    const { siteContent } = useData();
+    const { heroTitle, heroSubtitle, missionTitle, missionText } = siteContent.home;
+
     return (
         <div className="home-page">
             {/* Hero Section */}
             <section className="hero">
                 <div className="hero-content">
-                    <h1>Ritrova il tuo equilibrio interiore</h1>
+                    <h1>{heroTitle}</h1>
                     <p className="hero-subtitle">
-                        Percorsi di psicoterapia e sostegno psicologico su misura per te.
-                        Un approccio empatico e professionale per il tuo benessere.
+                        {heroSubtitle}
                     </p>
                     <div className="hero-buttons">
                         <Link to="/booking" className="btn-hero">Inizia il tuo percorso</Link>
@@ -28,10 +31,9 @@ const Home = () => {
             {/* Mission Section */}
             <section className="mission section-padding">
                 <div className="container">
-                    <h2 className="section-title">La mia Missione</h2>
+                    <h2 className="section-title">{missionTitle}</h2>
                     <p className="section-text text-center">
-                        Accompagnarti nella scoperta di te stesso, offrendoti uno spazio sicuro e privo di giudizio
-                        dove poter affrontare le tue paure e valorizzare le tue risorse.
+                        {missionText}
                     </p>
 
                     <div className="features-grid">

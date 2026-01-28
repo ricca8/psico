@@ -1,14 +1,18 @@
 import React from 'react';
 import { BookOpen, Award, UserCheck } from 'lucide-react';
+import { useData } from '../../context/DataContext';
 import './About.css';
 
 const About = () => {
+    const { siteContent } = useData();
+    const { name, subtitle, bio1, bio2 } = siteContent.about;
+
     return (
         <div className="about-page section-padding">
             <div className="container">
                 <div className="about-header text-center">
                     <h1>Chi Sono</h1>
-                    <p className="subtitle">Dr.ssa Giulia Rossi</p>
+                    <p className="subtitle">{name} - {subtitle}</p>
                 </div>
 
                 <div className="about-content">
@@ -19,13 +23,10 @@ const About = () => {
                     <div className="about-text">
                         <h2>Il mio approccio</h2>
                         <p>
-                            Credo che ogni persona abbia in sé le risorse per superare i momenti difficili.
-                            Il mio compito è aiutarti a ritrovarle. Utilizzo un approccio psicodinamico integrato,
-                            che unisce la comprensione profonda delle dinamiche interiori a strumenti pratici per il cambiamento.
+                            {bio1}
                         </p>
                         <p>
-                            Accolgo i miei pazienti in un ambiente protetto, dove l'ascolto non giudicante è la base
-                            per costruire una relazione terapeutica di fiducia.
+                            {bio2}
                         </p>
 
                         <div className="cv-highlights">

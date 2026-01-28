@@ -1,34 +1,10 @@
 import React from 'react';
+import { useData } from '../../context/DataContext';
 import './Blog.css';
 
-const articles = [
-    {
-        id: 1,
-        title: "Gestire l'ansia nel quotidiano",
-        excerpt: "Piccole strategie pratiche per non farsi sopraffare dallo stress di ogni giorno.",
-        date: "26 Gennaio 2024",
-        category: "Benessere",
-        imageColor: "#B2C29D"
-    },
-    {
-        id: 2,
-        title: "L'importanza del sonno",
-        excerpt: "Come migliorare la qualità del riposo per vivere meglio e più sereni.",
-        date: "20 Gennaio 2024",
-        category: "Salute",
-        imageColor: "#A4B6C1"
-    },
-    {
-        id: 3,
-        title: "Ricominciare da sé",
-        excerpt: "Imparare ad ascoltarsi è il primo passo per costruire relazioni sane.",
-        date: "15 Gennaio 2024",
-        category: "Crescita",
-        imageColor: "#E8E4D9"
-    }
-];
-
 const Blog = () => {
+    const { articles } = useData();
+
     return (
         <div className="blog-page section-padding">
             <div className="container">

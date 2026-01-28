@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Calendar, Video, MapPin, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useData } from '../../context/DataContext';
 import './Booking.css';
 
 const Booking = () => {
+    const { addBooking } = useData();
     const [step, setStep] = useState(1);
     const [bookingData, setBookingData] = useState({
         type: '',
@@ -12,6 +15,8 @@ const Booking = () => {
         email: '',
         notes: ''
     });
+
+    const [newBookingId, setNewBookingId] = useState(null);
 
     const handleTypeSelect = (type) => {
         setBookingData({ ...bookingData, type });
@@ -25,8 +30,8 @@ const Booking = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Simulate API call
-        console.log("Booking submitted:", bookingData);
+        const created = addBooking(bookingData);
+        setNewBookingId(created.id);
         setStep(4);
     };
 
@@ -129,6 +134,22 @@ const Booking = () => {
                             <h2>Prenotazione Confermata!</h2>
                             <p>Grazie {bookingData.name}. Abbiamo inviato una mail di conferma a {bookingData.email}.</p>
                             <p>Riceverai un reminder 24h prima dell'appuntamento.</p>
+
+                            {/* Simulated Email Notification */}
+                            <div style={{ margin: '2rem 0', padding: '1.5rem', border: '2px dashed #ccc', borderRadius: '8px', textAlign: 'left', background: '#f8f9fa' }}>
+                                <h4 style={{ marginTop: 0, color: '#666' }}>📩 SIMULAZIONE EMAIL UTENTE</h4>
+                                <p><strong>Oggetto:</strong> Conferma Prenotazione - Dr. Rossi</p>
+                                <p>Ciao {bookingData.name}, la tua prenotazione per {bookingData.type} il giorno {bookingData.date} alle {bookingData.time} è confermata.</p>
+                                <p>Se desideri cancellare, clicca qui:</p>
+                                <Link to={`/cancel-booking/${newBookingId}`} className="btn-link" style={{ fontSize: '0.9rem' }}>Cancella Prenotazione</Link>
+                            </div>
+
+                            <div style={{ margin: '1rem 0', padding: '1rem', border: '2px dashed #e74c3c', borderRadius: '8px', textAlign: 'left', background: '#fff5f5' }}>
+                                <h4 style={{ marginTop: 0, color: '#c0392b' }}>🔔 SIMULAZIONE NOTIFICA ADMIN</h4>
+                                <p>Nuova prenotazione da <strong>{bookingData.name}</strong> ({bookingData.email}).</p>
+                                <p>Accedi alla dashboard per gestire.</p>
+                            </div>
+
                             <Link to="/" className="btn-primary">Torna alla Home</Link>
                         </div>
                     )}
